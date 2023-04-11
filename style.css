@@ -1,0 +1,51 @@
+
+html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: 100%;
+    width:100%;
+    font-family: sans-serif,arial,helvetica;
+}
+
+body{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url(./images/programming-code-abstract-technology-background-of-software-deve-629285904_6500x4800_0.jpg);
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: blanchedalmond;
+    border-radius: 10px;
+    min-width: 450px;
+    
+
+}
+
+h2 {
+    border-bottom: 1px solid black;
+    padding-bottom: 15px;
+    padding: 20px 0px;
+    text-align: center;
+}
+
+.reset{
+    background-color: rgb(47, 153, 220);
+    width:350px;
+    height: 50px;
+    border-radius: 12px;
+    border-style: none;
+    font-size: large;
+    align-self: center;
+    margin: 20px 0px;
+    color: white
+}
+
+.section > p {
+    margin: 15px 20px;
+    font-size: large;
+}
