@@ -66,9 +66,7 @@ const conceptList = [
 
 
 
-// Functia trebuie sa itereze random prin array, sa aleaga un concept, iar in baza nr de litere sa creeze
-// tot atatea campuri pentru literele ce trebuie ghicite
-// de asemenea sa coreleze conceptul cu hintul ei aferent  si sa il printeze 
+
 
 let generateWord = () => {
     
@@ -76,10 +74,15 @@ let generateWord = () => {
     const randomPair = conceptList[randomIndex];
     const concept = randomPair.concept;
     const hint = randomPair.hint;
+    const html_hint = document.querySelector(".hint")
+    html_hint.innerHTML = `<strong>Hint:</strong> ${hint}`
 
+    for (let i=0; i< concept.length; i++) {
+    const letter = document.createElement("div");
+    letter.classList.add("letter");
+    const word = document.querySelector(".word");
+    word.appendChild(letter);
 
-    console.log(concept, hint)
+}}
 
-
-}
 generateWord()
