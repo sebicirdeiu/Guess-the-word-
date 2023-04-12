@@ -59,12 +59,17 @@ h2 {
 }
 
 .letter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-right: 10px;
    max-width: 60px;
    max-height: 60px;
    min-width: 50px;
    min-height: 50px;
     border: 1px solid grey;
+    font-size: xx-large;
+    color: rgb(47, 153, 220);
 }
 
 .hint {

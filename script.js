@@ -4,7 +4,6 @@ const conceptList = [
     { concept: "number", hint: "A numeric value" },
     { concept: "function", hint: "A block of code that can be invoked" },
     { concept: "if", hint: "A conditional statement" },
-    { concept: "else", hint: "An alternative branch of a conditional statement" },
     { concept: "DOM", hint: "Document Object Model - representation of web page elements" },
     { concept: "method", hint: "A function that belongs to an object" },
     { concept: "async", hint: "Asynchronous programming with Promises or async/await" },
@@ -20,7 +19,6 @@ const conceptList = [
     { concept: "JSON", hint: "JavaScript Object Notation - a data interchange format" },
     { concept: "AJAX", hint: "Asynchronous JavaScript and XML - a technique for making asynchronous server requests" },
     { concept: "Promise", hint: "A JavaScript object representing the eventual completion of an asynchronous operation" },
-    { concept: "await", hint: "A keyword used to wait for a Promise to resolve or reject" },
     { concept: "then", hint: "A method used to attach callbacks to a Promise" },
     { concept: "try", hint: "A block of code that is used to handle exceptions" },
     { concept: "catch", hint: "A block of code that is executed when an exception is thrown" },
@@ -33,43 +31,62 @@ const conceptList = [
 ];
 
 
-
-
-//generates a random word and the coresponding hint and render's them on page
-let generateWord = () => {
-    
+let playRound = () => {
     const randomIndex = Math.floor(Math.random()*conceptList.length);
     const randomPair = conceptList[randomIndex];
     const concept = randomPair.concept;
     const letters = randomPair.concept.split("");
     const word = document.querySelector(".word");
+    word.innerHTML = ""
     const hint = randomPair.hint;
-    const html_hint = document.querySelector(".hint")
+    const html_hint = document.querySelector(".hint");
     html_hint.innerHTML = `<strong>Hint:</strong> ${hint}`;
-
-
+    let remainingGuesses = 3;
+    const remainingTriesHtml = document.querySelector(".remaining_guesses");
+    remainingTriesHtml.innerHTML = `<strong>Remaining Guesses:</strong> ${remainingGuesses}`;
+    const wrongLetters_html = document.querySelector(".letters");
+    wrongLetters_html.innerHTML = `<strong>Wrong Letters:</strong>`;
+    let wrongLettersArr = [];
 
     for (let i=0; i< concept.length; i++) {
         const letterSpace = document.createElement("div");
         letterSpace.classList.add("letter");
-        word.appendChild(letterSpace); }
-    
-    const checkForLetter = window.addEventListener("keydown", (event) => {
+        word.appendChild(letterSpace);
+    }
+
+    const checkForLetter = (event) => {
         const keyPressed = event.key;
+
         let letterIndex = letters.indexOf(keyPressed);
 
-
-
         if(letters.includes(keyPressed)){
-          word.childNodes[(letterIndex)].innerHTML = keyPressed;
-          
-
-            
+            word.childNodes[(letterIndex)].innerHTML = keyPressed;
         }
+        else {
+            remainingGuesses--;
+            wrongLettersArr.push(keyPressed);
+            remainingTriesHtml.innerHTML = `<strong>Remaining Guesses:</strong> ${remainingGuesses}`;
+            wrongLetters_html.innerHTML = `<strong>Wrong Letters:</strong> ${wrongLettersArr}`;
+        }
+
+        if (remainingGuesses === 0) {
+           
+            alert("Game over! You lost.");
+            window.removeEventListener("keydown", checkForLetter); 
             
-   console.log(concept)
-    });
-    
+        } else if (word.textContent === concept) {
+            
+            alert("Correct!");
+            window.removeEventListener("keydown", checkForLetter); 
+        }
+    }
+
+    window.addEventListener("keydown", checkForLetter);
 }
 
-generateWord()
+const newRound = () => {
+    let button = document.querySelector(".reset");
+    button.addEventListener("click", playRound)
+};
+playRound();
+newRound();
