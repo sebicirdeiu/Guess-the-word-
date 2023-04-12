@@ -41,7 +41,7 @@ let playRound = () => {
     const hint = randomPair.hint;
     const html_hint = document.querySelector(".hint");
     html_hint.innerHTML = `<strong>Hint:</strong> ${hint}`;
-    let remainingGuesses = 3;
+    let remainingGuesses = 5;
     const remainingTriesHtml = document.querySelector(".remaining_guesses");
     remainingTriesHtml.innerHTML = `<strong>Remaining Guesses:</strong> ${remainingGuesses}`;
     const wrongLetters_html = document.querySelector(".letters");
